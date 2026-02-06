@@ -12,7 +12,7 @@ export const findAll = async (filters = {}) => {
     if (description) where.description = { contains: description, mode: 'insensitive' };
     if (price !== undefined) where.price = parseFloat(price);
     if (category) where.category = { contains: category, mode: 'insensitive' };
-    if (available) where.available = { contains: available };
+    if (available) where.available = { equals: available===true || available === 'true'};
 
     return await prisma.food.findMany({
         where,
